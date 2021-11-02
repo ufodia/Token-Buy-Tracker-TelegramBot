@@ -1,4 +1,4 @@
-########### IMPORTING MODULES ############
+########### IMPORTING MODULES ###########
 from os import environ, name
 from pathlib import Path
 from dotenv import load_dotenv
