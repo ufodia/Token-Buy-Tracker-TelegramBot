@@ -62,7 +62,7 @@ def start():
     html.send_keys(Keys.PAGE_DOWN)
     old_sold = ""
     while True:
-        first_line = wait.until(ec.presence_of_element_located((By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div[2]/div/div[3]/div[1]/div/div[2]/div/div[1]')))
+        first_line = wait.until(ec.presence_of_element_located((By.XPATH, '/html/body/div[1]/div/div[1]/div[2]/div/div[2]/div[2]/div/div[3]/div[1]/div/div[2]/div/div[1]')))
         a = first_line.find_elements_by_tag_name('div')
         tx = a[5].text.split('\n')[0]
         if old_sold == tx:
