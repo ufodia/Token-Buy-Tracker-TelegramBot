@@ -2,10 +2,10 @@
 FROM naytseyd/sedenbot:j1xlte
 
 # Working Directory
-WORKDIR /Tracker_Bot/
+WORKDIR /PriceBot/
 
 # Clone Repo
-RUN git clone https://github.com/thedeveloper12/Price_Tracker.git /Tracker_Bot/
+RUN git clone https://github.com/thedeveloper12/PriceBot.git /PriceBot/
 RUN pip3 install -r requirements.txt
 
 # Run bot
