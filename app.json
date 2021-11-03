@@ -14,11 +14,11 @@
             "description": "",
             "value": ""
         },
-        "HS_USERNAME": {
+        "API_KEY": {
             "description": "",
             "value": ""
         },
-        "HS_PASSWORD": {
+        "API_HASH": {
             "description": "",
             "value": ""
         },
