@@ -54,8 +54,6 @@ def start():
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_experimental_option("excludeSwitches", ["enable-automation", "enable-logging"])
     options.add_experimental_option('useAutomationExtension', False)
-    proxy = "104.26.3.46:80"
-    options.add_argument('--proxy-server=51.79.161.3:8080')
     driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, options=options)
     driver.set_window_size(1920, 1080)
     wait = WebDriverWait(driver, 10)
