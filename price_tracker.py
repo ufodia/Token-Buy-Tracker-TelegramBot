@@ -6,8 +6,6 @@ import logging
 from telethon.sync import TelegramClient,Button
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.utils import ChromeType
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -32,7 +30,6 @@ load_dotenv(f'config.env')
 BOT_TOKEN = environ.get('BOT_TOKEN')
 API_KEY = environ.get('API_KEY')
 API_HASH = environ.get('API_HASH')
-CHROME_DRIVER_PATH = environ.get('CHROME_DRIVER')
 ########################
 
 bot = TelegramClient('NasadogeBot',API_KEY,API_HASH).start(bot_token=BOT_TOKEN)
@@ -41,16 +38,16 @@ bot = TelegramClient('NasadogeBot',API_KEY,API_HASH).start(bot_token=BOT_TOKEN)
 def start():
     options = webdriver.ChromeOptions()
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36")
-    options.add_argument('--start-maximized')
+    options.add_argument('--window-size=1920x1080')
     options.add_argument('--headless')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-gpu')
-    driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install(),options=options)
+
+    driver = webdriver.Chrome(options=options)
     wait = WebDriverWait(driver, 10)
-    driver.set_window_size(1920, 1080)
     driver.get('https://poocoin.app/tokens/0x079dd74cc214ac5f892f6a7271ef0722f6d0c2e6')
-    time.sleep(10)
+    time.sleep(4)
     html = wait.until(ec.presence_of_element_located((By.TAG_NAME, 'html')))
     html.send_keys(Keys.PAGE_DOWN)
     html.send_keys(Keys.PAGE_DOWN)
