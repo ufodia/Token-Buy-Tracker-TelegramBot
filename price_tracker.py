@@ -6,6 +6,8 @@ import logging
 from telethon.sync import TelegramClient,Button
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 
@@ -59,7 +61,7 @@ def start():
     html.send_keys(Keys.PAGE_DOWN)
     old_sold = ""
     while True:
-        first_line = driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[2]/div/div[2]/div[2]/div/div[3]/div[1]/div/div[2]/div/div[1]')
+        first_line = wait.until(ec.presence_of_element_located((By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div[2]/div/div[3]/div[1]/div/div[2]/div/div[1]')))
         a = first_line.find_elements_by_tag_name('div')
         types = a[0].text.replace('\n','')
         amount = a[1].text.split('\n')[0]
