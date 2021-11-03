@@ -2,4 +2,4 @@ python-dotenv==0.19.1
 requests==2.26.0
 selenium==4.0.0
 Telethon==1.23.0
-undetected-chromedriver
+2captcha-python

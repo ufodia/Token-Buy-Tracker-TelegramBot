@@ -4,21 +4,25 @@ from pathlib import Path
 from dotenv import load_dotenv
 import logging
 from telethon.sync import TelegramClient,Button
-import undetected_chromedriver.v2 as uc
 from selenium import webdriver
 from pathlib import Path
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from twocaptcha import TwoCaptcha
 import time
+
+solver = TwoCaptcha('259328c2b8c26eba77c834f1dd04f5b8')
 
 ######### INFORMATION OF PROJECT ##########
 __author__ = "Emrecan Ayas"
 __version__ = "0.1Alpha"
 ###########################################
-
-
+site_key = "03196e24-ce02-40fc-aa86-4d6130e1c97a"
+area = "/html/body/div[1]/div[2]/div[2]/div/div/div[1]/div/form/div[4]/textarea"
+form = "/html/body/div[1]/div[2]/div[2]/div/div/div[1]/div/form"
+test = "/html/body/div[1]/div[2]/div[1]/h1"
 ###### SET LOGGERR ######
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
@@ -40,16 +44,37 @@ bot = TelegramClient('NasadogeBot',API_KEY,API_HASH).start(bot_token=BOT_TOKEN)
 
 
 def start():
-    options = uc.ChromeOptions()
-    # options.binary_location = GOOGLE_CHROME_BIN
+    options = webdriver.ChromeOptions()
+    options.binary_location = GOOGLE_CHROME_BIN
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36")
     options.add_argument('--start-maximize')
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
-    driver = uc.Chrome(options=options)
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_experimental_option("excludeSwitches", ["enable-automation", "enable-logging"])
+    options.add_experimental_option('useAutomationExtension', False)
+    proxy = "104.26.3.46:80"
+    options.add_argument('--proxy-server=51.79.161.3:8080')
+    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, options=options)
     driver.set_window_size(1920, 1080)
     wait = WebDriverWait(driver, 10)
     driver.get('https://poocoin.app/tokens/0x079dd74cc214ac5f892f6a7271ef0722f6d0c2e6')
+    while True:
+        try:
+            driver.find_element_by_xpath(test)
+            code = solver.hcaptcha(site_key, 'https://poocoin.app/tokens/0x079dd74cc214ac5f892f6a7271ef0722f6d0c2e6').get("code")
+            print(code)
+            write_code = f'document.getElementsByName("h-captcha-response")[0].value="{code}";'
+            form = f'document.getElementById("challenge-form").submit();'
+            driver.execute_script(write_code)
+            time.sleep(3)
+            driver.execute_script(form)
+            time.sleep(5)
+            continue
+        except Exception as e:
+            print(e)
+            break
     html = wait.until(ec.presence_of_element_located((By.TAG_NAME, 'html')))
     time.sleep(5)
     html.send_keys(Keys.PAGE_DOWN)
