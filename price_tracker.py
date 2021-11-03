@@ -31,6 +31,8 @@ load_dotenv(f'config.env')
 BOT_TOKEN = environ.get('BOT_TOKEN')
 API_KEY = environ.get('API_KEY')
 API_HASH = environ.get('API_HASH')
+GOOGLE_CHROME_BIN = environ.get("GOOGLE_CHROME_BIN")
+CHROMEDRIVER_PATH = environ.get("CHROMEDRIVER_PATH")
 ########################
 
 bot = TelegramClient('NasadogeBot',API_KEY,API_HASH).start(bot_token=BOT_TOKEN)
@@ -38,13 +40,14 @@ bot = TelegramClient('NasadogeBot',API_KEY,API_HASH).start(bot_token=BOT_TOKEN)
 
 def start():
     options = webdriver.ChromeOptions()
+    options.binary_location = GOOGLE_CHROME_BIN
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36")
-    options.add_argument('--window-size=1920x1080')
+    options.add_argument('--start-maximize')
     options.add_argument('--headless')
-    options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--no-sandbox')
-    options.add_argument('--disable-gpu')
-    driver = webdriver.Chrome(executable_path=f"{Path.cwd}/chromedriver",options=options)
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=options)
+    driver.set_window_size(1920, 1080)
     wait = WebDriverWait(driver, 10)
     driver.get('https://poocoin.app/tokens/0x079dd74cc214ac5f892f6a7271ef0722f6d0c2e6')
     time.sleep(4)
