@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import logging
 from telethon.sync import TelegramClient,Button
 from selenium import webdriver
+from pathlib import Path
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
@@ -43,8 +44,7 @@ def start():
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-gpu')
-
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(executable_path=f"{Path.cwd}/chromedriver",options=options)
     wait = WebDriverWait(driver, 10)
     driver.get('https://poocoin.app/tokens/0x079dd74cc214ac5f892f6a7271ef0722f6d0c2e6')
     time.sleep(4)
