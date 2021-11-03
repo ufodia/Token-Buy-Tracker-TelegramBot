@@ -94,5 +94,6 @@ def start():
         chat = bot.get_entity("https://t.me/nasadoge_buy_sell")
         bot.send_message(chat, message=text,buttons=keyboard)
         
+
 if __name__ == "__main__":
     start()
