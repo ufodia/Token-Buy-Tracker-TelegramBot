@@ -60,13 +60,13 @@ def start():
         times = a[4].text.replace('\n','')
         tx = a[5].text.split('\n')[0]
         tx_url = a[5].find_element_by_tag_name('a').get_attribute('href')
+        if old_sold == tx:
+            continue
+        old_sold = tx
         if types == 'Buy':
             emoji = "🟢"
         else:
             emoji = "🔴"
-        if old_sold == tx:
-            continue
-        old_sold = tx
         text = (
             f"**New {types} Transaction!** {emoji}\n"
             f"**Time**: `{times}`\n"
