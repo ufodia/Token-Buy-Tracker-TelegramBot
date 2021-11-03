@@ -1,1 +1,1 @@
-web: python3 price_tracker.py
+web: python3 price_tracker.p
