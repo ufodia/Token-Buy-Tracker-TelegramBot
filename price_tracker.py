@@ -59,40 +59,43 @@ def start():
     html.send_keys(Keys.PAGE_DOWN)
     html.send_keys(Keys.PAGE_DOWN)
     html.send_keys(Keys.PAGE_DOWN)
-    old_sold = ""
-    while True:
-        first_line = wait.until(ec.presence_of_element_located((By.XPATH, '/html/body/div[1]/div/div[1]/div[2]/div/div[2]/div[2]/div/div[3]/div[1]/div/div[2]/div/div[1]')))
-        a = first_line.find_elements_by_tag_name('div')
-        tx = a[5].text.split('\n')[0]
-        if old_sold == tx:
-            continue
-        old_sold = tx
-        types = a[0].text.replace('\n','')
-        amount = a[1].text.split('\n')[0]
-        price = a[2].text.split('\n')[0]
-        token_price = a[3].text.split('\n')[0]
-        times = a[4].text.replace('\n','')
-        tx_url = a[5].find_element_by_tag_name('a').get_attribute('href')
+    driver.get_screenshot_as_file('photo.jpg')
+    chat = bot.get_entity("https://t.me/nasadoge_buy_sell")
+    bot.send_file(chat, open('photo.jpg','rb'))
+    # old_sold = ""
+    # while True:
+    #     first_line = wait.until(ec.presence_of_element_located((By.XPATH, '/html/body/div[1]/div/div[1]/div[2]/div/div[2]/div[2]/div/div[3]/div[1]/div/div[2]/div/div[1]')))
+    #     a = first_line.find_elements_by_tag_name('div')
+    #     tx = a[5].text.split('\n')[0]
+    #     if old_sold == tx:
+    #         continue
+    #     old_sold = tx
+    #     types = a[0].text.replace('\n','')
+    #     amount = a[1].text.split('\n')[0]
+    #     price = a[2].text.split('\n')[0]
+    #     token_price = a[3].text.split('\n')[0]
+    #     times = a[4].text.replace('\n','')
+    #     tx_url = a[5].find_element_by_tag_name('a').get_attribute('href')
         
-        if types == 'Buy':
-            emoji = "🟢"
-        else:
-            emoji = "🔴"
-        text = (
-            f"**New {types} Transaction!** {emoji}\n"
-            f"**Time**: `{times}`\n"
-            f"**Amount:** `{amount}`\n"
-            f"**Price:** `{price}`\n"
-            f"**Sold By** `{token_price}`\n"
-        )
-        keyboard = [
-        [  
-            Button.url(text='Txn Hash',url=tx_url)
-        ]
-        ]
+    #     if types == 'Buy':
+    #         emoji = "🟢"
+    #     else:
+    #         emoji = "🔴"
+    #     text = (
+    #         f"**New {types} Transaction!** {emoji}\n"
+    #         f"**Time**: `{times}`\n"
+    #         f"**Amount:** `{amount}`\n"
+    #         f"**Price:** `{price}`\n"
+    #         f"**Sold By** `{token_price}`\n"
+    #     )
+    #     keyboard = [
+    #     [  
+    #         Button.url(text='Txn Hash',url=tx_url)
+    #     ]
+    #     ]
 
-        chat = bot.get_entity("https://t.me/nasadoge_buy_sell")
-        bot.send_message(chat, message=text,buttons=keyboard)
+    #     chat = bot.get_entity("https://t.me/nasadoge_buy_sell")
+    #     bot.send_message(chat, message=text,buttons=keyboard)
         
 
 if __name__ == "__main__":
