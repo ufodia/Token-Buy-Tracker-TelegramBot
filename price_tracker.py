@@ -63,16 +63,17 @@ def start():
     while True:
         first_line = wait.until(ec.presence_of_element_located((By.XPATH, '//*[@id="root"]/div/div[1]/div[2]/div/div[2]/div[2]/div/div[3]/div[1]/div/div[2]/div/div[1]')))
         a = first_line.find_elements_by_tag_name('div')
+        tx = a[5].text.split('\n')[0]
+        if old_sold == tx:
+            continue
+        old_sold = tx
         types = a[0].text.replace('\n','')
         amount = a[1].text.split('\n')[0]
         price = a[2].text.split('\n')[0]
         token_price = a[3].text.split('\n')[0]
         times = a[4].text.replace('\n','')
-        tx = a[5].text.split('\n')[0]
         tx_url = a[5].find_element_by_tag_name('a').get_attribute('href')
-        if old_sold == tx:
-            continue
-        old_sold = tx
+        
         if types == 'Buy':
             emoji = "🟢"
         else:
@@ -92,7 +93,6 @@ def start():
 
         chat = bot.get_entity("https://t.me/nasadoge_buy_sell")
         bot.send_message(chat, message=text,buttons=keyboard)
-        del a
         
 if __name__ == "__main__":
     start()
