@@ -1,1 +1,1 @@
-worker: python3 price_tracker.py
+worker: python3 tracker.py
