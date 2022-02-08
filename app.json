@@ -8,7 +8,7 @@
         "eth tracker",
         "bep2 tracker"
     ],
-    "repository": "https://github.com/thedeveloper12/Token-Buy-Tracker",
+    "repository": "https://github.com/thedeveloper12/Token-Buy-Tracker-TelegramBot",
     "env": {
         "BOT_TOKEN": {
             "description": "Telegram Bot Token",
