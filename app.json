@@ -1,46 +1,46 @@
 {
     "name": "bb",
-    "description": "simple hcl",
+    "description": "A similar buy/sell tracker for erc20 and bep20 tokens",
     "keywords": [
-        "python",
-        "bot",
-        "miui",
-        "bot",
-        "3"
+        "price tracker",
+        "bep20 tracker",
+        "token tracker",
+        "eth tracker",
+        "bep2 tracker"
     ],
-    "repository": "https://github.com/thedeveloper12/PriceBot",
+    "repository": "https://github.com/thedeveloper12/Token-Buy-Tracker",
     "env": {
         "BOT_TOKEN": {
-            "description": "",
+            "description": "Telegram Bot Token",
             "value": ""
         },
         "API_KEY": {
-            "description": "",
+            "description": "Telegram Api Key",
             "value": ""
         },
         "API_HASH": {
-            "description": "",
+            "description": "Telegram Api Hash",
             "value": ""
         },
-        "CHROMEDRIVER_PATH": {
-            "description": "",
-            "value": "/app/.chromedriver/bin/chromedriver"
+       "CHANNEL": {
+           "description": "Channel Url (https://t.me/channelname)",
+           "value": ""
+       },
+        "CONTRACT": {
+            "description": "Token Contract Address",
+            "value": ""
         },
-        "GOOGLE_CHROME_BIN": {
-            "description": "",
-            "value": "/app/.apt/usr/bin/google-chrome"
+        "PANCAKESWAP_ADDRESS": {
+            "description": "Pancake Swap address of token (Can be found in token holders list)",
+            "value": ""
+        },
+        "CHAIN":{
+            "description":"Token Network Cahin (bsc,eth)",
+            "value": ""
+        },
+        "UNMARSHAL_API_KEY":{
+           "description": "Unmarshal Api key (https://console.unmarshal.io/)",
+            "value": ""
         }
-    },
-    "buildpacks": [
-        {
-            "url": "heroku/python"
-        },
-        {
-            "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
-        },
-        {
-            "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
-        }
-        
-    ]
+    }
 }
